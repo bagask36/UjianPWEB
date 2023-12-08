@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikasi Reservasi</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap");
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        font-family: "Quicksand", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #6b9eea;
+        padding: 16px;
+        color: white;
+        text-align: center;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .wrapper .container {
+        width: 1024px;
+        border-radius: 8px;
+        margin: 16px;
+        background: #f8f9fa;
+        flex-grow: 1;
+        padding: 16px;
+        height: fit-content;
+      }
+
+      .item {
+        border-radius: 16px;
+        margin-top: 16px;
+        padding: 12px 24px 12px 24px;
+        background: white;
+        display: flex;
+        align-items: center;
+      }
+
+      .item > .inner h2 {
+        margin-bottom: unset;
+      }
+
+      .item > .inner p {
+        margin-top: 5px;
+      }
+
+      .form {
+        background: white;
+        display: flex;
+        padding: 16px;
+        flex-direction: column;
+        border-radius: 16px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        margin-bottom: 4px;
+        font-size: 18px;
+        font-weight: lighter;
+      }
+
+      .shadow {
+        box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+          0 15px 40px rgba(166, 173, 201, 0.2);
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="date"] {
+        background-color: #cae1ff;
+        border: 3px solid #6b9eea;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 8px;
+        font-size: 24px;
+      }
+
+      .btn-submit {
+        width: 100%;
+        border-radius: 16px;
+        padding: 12px 24px;
+        border: 2px solid #87a2cb;
+        color: #87a2cb;
+        font-size: 24px;
+        margin-top: 10px;
+        align-self: flex-end;
+        cursor: pointer;
+      }
+
+      .btn-submit:hover {
+        background-color: #87a2cb;
+        color: white;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .form-title {
+        margin: auto 0;
+      }
+
+      .button-grup {
+        margin-left: auto;
+      }
+
+      .check-button {
+        font-size: 24px;
+        padding: 12px 24px;
+        background-size: contain;
+        /* margin-left: auto; */
+        cursor: pointer;
+        border: 2px solid #87a2cb;
+        border-radius: 16px;
+        color: #87a2cb;
+      }
+
+      .check-button:hover {
+        background-color: #87a2cb;
+        color: white;
+      }
+
+      .trash-button {
+        font-size: 24px;
+        padding: 12px 24px;
+        background-size: contain;
+        margin-left: 10px;
+        cursor: pointer;
+        border: 2px solid #e6665c;
+        border-radius: 16px;
+        color: #e6665c;
+      }
+
+      .trash-button:hover {
+        background-color: #e6665c;
+        color: white;
+      }
+
+      .undo-button {
+        font-size: 24px;
+        padding: 12px 24px;
+        background-size: contain;
+        margin-left: auto;
+        cursor: pointer;
+        border: 2px solid #52a572;
+        border-radius: 16px;
+        color: #52a572;
+      }
+
+      .undo-button:hover {
+        background-color: #52a572;
+        color: white;
+      }
+
+      .edit-button {
+        font-size: 24px;
+        padding: 12px 24px;
+        background-size: contain;
+        margin-left: 10px;
+        cursor: pointer;
+        border: 2px solid #52a572;
+        border-radius: 16px;
+        color: #52a572;
+      }
+
+      .edit-button:hover {
+        background-color: #52a572;
+        color: white;
+      }
+
+      @media only screen and (max-width: 1024px) {
+        .wrapper {
+          width: 90vw;
+          margin: auto;
+        }
+
+        .wrapper .container {
+          width: 100%;
+        }
+
+        .list-item {
+          width: 100%;
+        }
+
+        .btn-submit {
+          padding: 15px;
+        }
+
+        .trash-button,
+        .undo-button,
+        .check-button,
+        .edit-button {
+          flex-grow: 1;
+          margin-left: 0;
+          padding: 15px;
+        }
+
+        .button-grup {
+          display: flex;
+          gap: 5px;
+        }
+        .item {
+          display: block;
+        }
+
+        .form {
+          width: 100%;
+        }
+      }
+
+      @media only screen and (max-width: 480px) {
+        .btn-submit {
+          padding: 3px;
+          border-radius: 12px;
+          font-size: 20px;
+        }
+
+        .trash-button,
+        .undo-button,
+        .check-button {
+          flex-grow: 1;
+          margin-left: 0;
+          border-radius: 12px;
+          padding: 3px;
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Gunadarma Resto</h1>
+    </header>
+    <div class="wrapper">
+      <div class="container bg-white shadow" id="tambah-buku">
+        <h2 class="container-header text-center">Reservasi</h2>
+        <form action="#" class="form shadow" id="form">
+          <div class="form-group form-title">
+            <label for="nama">Nama</label>
+            <input
+              type="text"
+              id="nama"
+              name="nama"
+              placeholder="Masukkan nama"
+              required
+            />
+          </div>
+          <div class="form-group form-title">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="Masukkan email"
+              required
+            />
+          </div>
+          <div class="form-group form-title">
+            <label for="nomor">Nomor Telepon</label>
+            <input
+              type="number"
+              id="nomor"
+              name="nomor"
+              minlength="4"
+              placeholder="Masukkan nomor telepon"
+              required
+            />
+          </div>
+          <div class="form-group form-title">
+            <label for="tgl-reservasi">Tanggal Reservasi</label>
+            <input
+              type="date"
+              id="tgl-reservasi"
+              name="tgl-reservasi"
+              required
+            />
+          </div>
+          <input
+            type="submit"
+            value="Submit"
+            name="submit"
+            class="btn-submit"
+          />
+        </form>
+      </div>
+
+      <div class="container">
+        <h2 class="container-header text-center">Reservasi Disetujui</h2>
+        <div class="list-item" id="belum-dibaca"></div>
+      </div>
+
+      <div class="container">
+        <h2 class="container-header text-center">Reservasi Selesai</h2>
+        <div class="list-item" id="sudah-dibaca"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
